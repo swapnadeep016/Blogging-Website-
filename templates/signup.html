@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Signup Page</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/utils.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blogpost.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	
+
+	<script type="text/javascript" src="{% static 'myjs.js' %}"></script>
+    <script type="text/javascript" src="{% static 'jsmain.js' %}"></script>
+
+
+</head>
+<body>
+	<nav class="navigation max-width-1 m-auto">
+    
+        <div class="nav-left">
+            <a href="/">
+                <span><img src="{% static 'img/logo.png' %}" width="94px" alt=""></span>
+            </a>
+            <h1>Mindwriter</h1>
+        </div>
+        {% block login %}
+        <div class="nav-right">
+               <div class="w3-container">
+               <a href="/user/signup">Sign Up</a>
+               <a href="/user/login"><button class="w3-button w3-black">Log In</button></a>
+                </div>
+                </div>
+        </div>
+        {% endblock %}
+    </nav>
+  <hr>
+	<div class="container jumbotron">
+		<div class="row">
+			<div class="col-md-6">
+				<h1>Signup here!</h1>
+				
+                <form method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="form-group">
+						<input type="text" name="email" class="form-control" placeholder="email">
+					</div>
+					
+					<div class="form-group">
+						<input type="text" name="username" class="form-control" placeholder="username">
+					</div>
+					<div class="form-group">
+						<input type="text" name="password" class="form-control" placeholder="password">
+					</div>
+			</div>
+			<div class="col-md-6">
+				
+
+	
+					<div class="form-group">
+						<!-- CSS -->
+						<style>
+						#my_camera{
+ 						width: 320px;
+ 						height: 240px;
+ 						border: 1px solid black;
+						}
+                        #myDIV1 {
+                        position: absolute;
+                        width: 140px;
+                        height: 140px;
+                        z-index: 25;
+                        top: 25%;
+                        left: 30%;
+                        transform: translate(-50%, -50%);
+                        border: 2px solid red;
+                    }
+						</style>
+
+						<div id="my_camera"></div>
+						<br>
+						<input type=button value="Turn On Camera" onClick="configure()">
+						<input type=button value="Take Snapshot" onClick="take_snapshot()">
+						<br>
+ 						<p>This Image will get saved in Database </p>
+						<div id="results">
+                        <div id="myDIV1">
+                        
+                        </div>
+                        </div>
+ 				        <input type="hidden" name="userimage" value="" id="results2">
+						<!-- Webcam.min.js -->
+                        
+						
+
+						<!-- Configure a few settings and attach camera -->
+						<script language="JavaScript">
+ 						
+ 						function configure(){
+						Webcam.set({
+						width: 320,
+						height: 240,
+						image_format: 'jpeg',
+						jpeg_quality: 90
+						});
+						Webcam.attach( '#my_camera' );
+						}
+
+						function take_snapshot() {
+ 
+ 						// take snapshot and get image data
+ 						Webcam.snap( function(data_uri) {
+  					
+                        document.getElementById('results').innerHTML = '<img  "height="200px" src="'+data_uri+'"/>';
+                        document.getElementById('results2').value=data_uri;
+                        document.getElementById('my_camera').style.display = "none";
+                        Webcam.reset();
+  						document.getElementById('my_camera').style.width = "0px";
+  						document.getElementById('my_camera').style.height = "0px";
+  						document.getElementById('my_camera').style.border = "0px";
+                        document.getElementById('myDIV1').style.display = "none";
+  						var base64image =  document.getElementById("imageprev").src;
+  						} );
+						}
+						</script>
+
+					</div>   				
+					
+					
+					<div class="form-group">
+						<input type="submit" value="Signup" class="form-control btn btn-primary">
+					</div>
+
+					<a href="/user/login"></a><b>Already have an account ?</b></a>
+
+				</form>
+                <div class="form-group">
+						<a href="/user/login">
+						<button class="form-control btn btn-primary"><b>Log in</b></button>
+						</a>
+					</div>
+			</div>
+			
+		</div>
+	</div>
+    
+</body>
+</html>

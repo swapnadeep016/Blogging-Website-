@@ -1,0 +1,47 @@
+{%  extends 'index.html' %}
+{% block login %}
+        <div class="nav-right">
+               <div class="w3-container">
+               	<a href="#">Hello {{ name }} </a>
+               <a href="/user/logout"><button class="w3-button w3-black">Logout</button></a>
+                </div>
+                </div>
+        </div>
+        {% endblock %}
+{% block content %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<nav class="navigation">
+    
+        <div class="nav-left2" >
+             <ul class="menues">
+                <li><a href="/blog/dashboard">Dashboard</a></li>
+                <li><a href="/blog/addblog">Add Blogs</a></li>
+                <li><a href="/blog/draft">Draft</a></li>
+                <li><a href="/blog/published">Published</a></li>
+                <li><a href="/blog/allblog">Premium Blogs</a>
+            </ul>
+        </div>
+</nav>
+<div class="container">
+	<h2 align="center">Premium Blogs are here</h2>
+	<hr>
+	{% for i in blog %}
+    
+        <div class="container" style="border:1px solid black;">
+
+            <a href="/blog/showblog/{{ i.id }}">
+                <h3>{{ i.title }}</h3>
+                <h5>{{ i.summary }}</h5>
+                <p>{{ i.date }}</p>
+                </a>
+        </div>
+    
+    <br>
+	{% endfor%}
+</div>
+<br>
+<br>
+
+{% endblock %}
